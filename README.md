@@ -5,9 +5,11 @@
 ----------
 
 ## 🔥 High Priority
-- [ ] Be MicroService
+- [X] MicroService
+- [ ] RabbitMQ
 - [ ] MongoDB database
 - [ ] mySQL database
+- [ ] Redis
 
 [//]: # (## 🚀 Features)
 

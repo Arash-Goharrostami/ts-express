@@ -3,24 +3,27 @@
  * This script configures middleware, routes, error handling, and initializes external modules such as cron jobs and MongoDB.
  */
 import express from 'express';
-// import morgan from 'morgan';
-// import cors  from 'cors';
+import dotenv from "dotenv";
+import path from "path";
+import database from "../../../libs/database/src";
+import process from "node:process";
 
-// const v1 = require('./Routes/v1');
-// const StatusCodes = require('./Values/StatusCodes');
-// const ErrorHandler = require('./Handler/ErrorHandler');
-
-// require('dotenv').config();
-// require('./cron');
-// require('./mongoDB');
 
 const app = express();
 
-/** Middleware for logging HTTP requests in development mode. */
-// app.use(morgan("dev"));
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-/** Middleware for enabling Cross-Origin Resource Sharing (CORS). */
-// app.use(cors());
+const dbInstance = database.MongoDB.getInstance();
+
+dbInstance.connect({
+  mongoDBIp      : process.env.MONGO_DB_IP      !,
+  mongoDbTime    : process.env.MONGODB_TIME     !,
+  mongoDBProt    : process.env.MONGO_DB_PORT    !,
+  mongoDbUser    : process.env.MOGNO_DB_USER    !,
+  mongoDbName    : process.env.MONGO_DB_NAME    !,
+  mongoDbPassword: process.env.MONGO_DB_PASSWORD!,
+  mongoDbAuthUser: process.env.MONGO_DB_AUTH_USR!,
+});
 
 /** Middleware to parse incoming JSON requests. */
 app.use(express.json());

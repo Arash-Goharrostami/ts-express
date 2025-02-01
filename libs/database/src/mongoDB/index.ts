@@ -5,6 +5,7 @@ type MongoConfig = {
   mongoDBProt: string;
   mongoDbUser: string;
   mongoDbName: string;
+  mongoDbTime?: string;
   mongoDbPassword: string;
   mongoDbAuthUser?: string;
 };
@@ -26,14 +27,16 @@ class MongoDB {
   public async connect(config: MongoConfig): Promise<void> {
     this.connectionUrl = `mongodb://${config.mongoDBIp}:${config.mongoDBProt}/${config.mongoDbName}`;
     this.options = {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
       authSource: config.mongoDbAuthUser,
     } as ConnectOptions;
 
     try {
       await mongoose.connect(this.connectionUrl, this.options);
-      console.log(`MongoDB connection was SUCCESSFUL on ${this.connectionUrl}`);
+      setTimeout(() => {
+        console.log(` -- MongoDB connection was SUCCESSFUL on ${this.connectionUrl}`);
+      }, Number(config.mongoDbTime));
     } catch (error) {
       console.error({ MONGO_ERROR: error });
     }

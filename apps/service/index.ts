@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
 import http from "http";
 import app from "./src";
+import path from "path";
 
 // Load environment variables from a .env file
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /** --------------------------------------------------------------------------------------------------------------------
  * The port number on which the server will run.
@@ -24,6 +25,6 @@ const server = http.createServer(app);
  */
 server.listen(PORT, () => {
   setTimeout(() => {
-    console.log(`-> app ${NAME}   is Runing on http://localhost:${PORT}`);
+    console.log(` -> app ${NAME}   is Runing on http://localhost:${PORT}`);
   }, Number(TIME));
 });

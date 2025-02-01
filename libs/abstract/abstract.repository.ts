@@ -4,8 +4,10 @@
  * @description this file will share common repository methods for the project.
  * @typedef {Object} TDocument
  */
-import { AbstractEntity            } from './abstract.entity';
-import mongoose from 'mongoose';
+import { AbstractEntity } from './abstract.entity';
+import mongoose, {Connection, Model} from 'mongoose';
+
+
 
 /** --------------------------------------------------------------------------------------------------------------------
  * class AbstractRepository for use abstract useg
@@ -25,12 +27,20 @@ export abstract class AbstractRepository<TDocument extends AbstractEntity> {
    * @protected
    */
 
+  // protected readonly model: Model<TDocument>;
+  // protected readonly connection: Connection; // ✅ Change 'private' to 'protected'
+
   /** ------------------------------------------------------------------------------------------------------------------
    * local Constractor
    *
    * @param {Model<TDocument>} model
    * @param {Connection      } connection
    */
+  // protected constructor(model: Model<TDocument>, connection: Connection) {
+  //   this.model = model;
+  //   this.connection = connection;
+  // }
+
   protected constructor(
     protected readonly model     : mongoose.Model<TDocument>,
     private   readonly connection: mongoose.Connection,
