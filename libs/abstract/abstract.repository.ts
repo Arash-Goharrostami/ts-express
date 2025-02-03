@@ -2,17 +2,17 @@
  * @file AbstractRepository
  * @tutorial only need to extand in your repository.
  * @description this file will share common repository methods for the project.
- * @typedef {Object} TDocument
  */
+
 import { AbstractEntity } from './abstract.entity';
 import mongoose, {Connection, Model} from 'mongoose';
 
 
 
 /** --------------------------------------------------------------------------------------------------------------------
- * class AbstractRepository for use abstract useg
+ * @description class AbstractRepository for use abstract useg
  *
- * @class
+ * @class AbstractRepository
  * @extends AbstractEntity
  * @protected abstract readonly logger
  * @protected constractor
@@ -21,14 +21,7 @@ import mongoose, {Connection, Model} from 'mongoose';
  * @protected findOneAndUpdate
  * @protected upsert
  */
-export abstract class AbstractRepository<TDocument extends AbstractEntity> {
-  /** ------------------------------------------------------------------------------------------------------------------
-   * just import logger for this class
-   * @protected
-   */
-
-  // protected readonly model: Model<TDocument>;
-  // protected readonly connection: Connection; // ✅ Change 'private' to 'protected'
+export abstract class AbstractRepository<Object extends AbstractEntity> {
 
   /** ------------------------------------------------------------------------------------------------------------------
    * local Constractor
@@ -36,52 +29,56 @@ export abstract class AbstractRepository<TDocument extends AbstractEntity> {
    * @param {Model<TDocument>} model
    * @param {Connection      } connection
    */
-  // protected constructor(model: Model<TDocument>, connection: Connection) {
-  //   this.model = model;
-  //   this.connection = connection;
-  // }
-
   protected constructor(
-    protected readonly model     : mongoose.Model<TDocument>,
+    protected readonly model     : mongoose.Model<Object>,
     private   readonly connection: mongoose.Connection,
   ) {}
 
   /** ------------------------------------------------------------------------------------------------------------------
-   * method for Abstract create
+   * @description method for Abstract create
    *
+   * @async
+   * @method
+   * @public
    * @param { Omit<TDocument, '_id'> } document
    * @param { SaveOptions } options
    */
-  protected async create(document: Omit<TDocument, '_id'>, options?: mongoose.SaveOptions,): Promise<TDocument> {
+  public async create(document: Omit<Object, '_id'>, options?: mongoose.SaveOptions,): Promise<Object> {
     const createdDocument = new this.model({ ...document, _id: new mongoose.Types.ObjectId(), });
-    return (await createdDocument.save(options)).toJSON() as unknown as TDocument;
+    return (await createdDocument.save(options)).toJSON() as unknown as Object;
   }
 
   /** ------------------------------------------------------------------------------------------------------------------
-   * method for Abstract findOne
+   * @description method for Abstract findOne
    *
+   * @async
+   * @method
+   * @public
    * @param { FilterQuery<TDocument> } filterQuery
    */
-  protected async findOne(filterQuery: mongoose.FilterQuery<TDocument>): Promise<TDocument> {
+  public async findOne(filterQuery: mongoose.FilterQuery<Object>): Promise<Object> {
     const document = await this.model.findOne(filterQuery, {}, { lean: true });
     if (!document) {
       console.warn('Document not found with filterQuery', filterQuery);
       // TODO :: ErrorHandler
       // throw new NotFoundException('Document not found.');
     }
-    return (document) as unknown as TDocument;
+    return (document) as unknown as Object;
   }
 
   /** ------------------------------------------------------------------------------------------------------------------
-   * method for Abstract findOneAndUpdate
+   * @description method for Abstract findOneAndUpdate
    *
+   * @async
+   * @method
+   * @public
    * @param {FilterQuery<TDocument>} filterQuery
    * @param {UpdateQuery<TDocument>} update
    */
-  protected async findOneAndUpdate(
-    filterQuery: mongoose.FilterQuery<TDocument>,
-    update: mongoose.UpdateQuery<TDocument>,
-  ): Promise<TDocument> {
+  public async findOneAndUpdate(
+    filterQuery: mongoose.FilterQuery<Object>,
+    update: mongoose.UpdateQuery<Object>,
+  ): Promise<Object> {
     const document = await this.model.findOneAndUpdate(filterQuery, update, {
       lean: true, new: true,
     });
@@ -90,34 +87,44 @@ export abstract class AbstractRepository<TDocument extends AbstractEntity> {
       // TODO :: ErrorHandler
       // throw new NotFoundException('Document not found.');
     }
-    return document as unknown as TDocument;
+    return document as unknown as Object;
   }
 
   /** ------------------------------------------------------------------------------------------------------------------
-   * method for protected upsert
+   * @description method for public upsert
    *
+   * @async
+   * @method
+   * @public
    * @param {FilterQuery<TDocument>} filterQuery
    * @param {Partial    <TDocument>} document
    */
-  protected async upsert(filterQuery: mongoose.FilterQuery<TDocument>, document: Partial<TDocument>): Promise<TDocument> {
+  public async upsert(filterQuery: mongoose.FilterQuery<Object>, document: Partial<Object>): Promise<Object> {
     return this.model.findOneAndUpdate(filterQuery, document, {
       lean: true, upsert: true, new: true,
-    }) as unknown as TDocument;
+    }) as unknown as Object;
   }
 
   /** ------------------------------------------------------------------------------------------------------------------
-   * method for protected find
+   * @description method for public find
    *
+   * @async
+   * @method
+   * @public
    * @param {FilterQuery<TDocument>} filterQuery
    */
-  protected async find(filterQuery: mongoose.FilterQuery<TDocument>): Promise<TDocument> {
-    return this.model.find(filterQuery, {}, { lean: true }) as unknown as TDocument;
+  public async find(filterQuery: mongoose.FilterQuery<Object>): Promise<Object> {
+    return this.model.find(filterQuery, {}, { lean: true }) as unknown as Object;
   }
 
   /** ------------------------------------------------------------------------------------------------------------------
-   * method for protected startTransaction
+   * @description method for public startTransaction
+   *
+   * @async
+   * @method
+   * @public
    */
-  protected async startTransaction(): Promise<mongoose.ClientSession> {
+  public async startTransaction(): Promise<mongoose.ClientSession> {
     const session = await this.connection.startSession();
     await session.startTransaction();
     return session;
