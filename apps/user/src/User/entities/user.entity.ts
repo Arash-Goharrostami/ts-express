@@ -8,7 +8,7 @@ enum UserType {
 }
 
 // Interface for User Document
-interface IUser extends Document {
+interface IUser {
   _id: mongoose.Types.ObjectId;
   userTypes: UserType[];
   firstName: string;

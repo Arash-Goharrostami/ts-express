@@ -3,16 +3,18 @@
  */
 
 import "reflect-metadata";
-import { JsonController, Get, Param } from "routing-controllers";
-import {UserContorllerDto} from "./dto/controller.dto";
+import {JsonController, Get, Param, Post, Body} from "routing-controllers";
 import UserService from './user.service';
+import {IUserController} from "./interface/userController.interface";
+import {CreateUserDto} from "./dto/createUser.dto";
+import {IUser} from "./entities/user.entity";
 
 /** --------------------------------------------------------------------------------------------------------------------
  * @description class for handel all User routes in application
  * @class
  */
 @JsonController('/users')
-export default class UserController implements UserContorllerDto {
+export default class UserController implements IUserController {
 
   /** ------------------------------------------------------------------------------------------------------------------
    * @description local private values validations
@@ -27,14 +29,12 @@ export default class UserController implements UserContorllerDto {
     this.userService = new UserService(); // Manually create an instance
   }
 
-  @Get('/')
-  getAllUsers() {
-    const msg = this.userService.test();
-    return { msg };
-  }
-
-  @Get('/:_id')
-  getUser(@Param('_id') _id: string) {
-    return { message: `Get user with ID ${_id}` };
+  /**
+   * @author Arash Goharrostami :: Thursday 6 February 2025 - 08:20 am
+   * @param createUserDto
+   */
+  @Post('/')
+  async create(@Body() createUserDto: CreateUserDto): Promise<IUser> {
+    return await this.userService.create(createUserDto)
   }
 }

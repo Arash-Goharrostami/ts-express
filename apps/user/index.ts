@@ -19,6 +19,8 @@ const TIME: string = process.env.APPLICATION_TIME || '1000';
  */
 const server = http.createServer(app);
 
+console.log(new Date());
+
 /** --------------------------------------------------------------------------------------------------------------------
  * Starts the HTTP server and listens on the specified port.
  * Logs a message indicating successful server connection.
