@@ -29,7 +29,7 @@ export default class UserController implements IUserController {
     this.userService = new UserService(); // Manually create an instance
   }
 
-  /**
+  /** ------------------------------------------------------------------------------------------------------------------
    * @author Arash Goharrostami :: Thursday 6 February 2025 - 08:20 am
    * @param createUserDto
    */

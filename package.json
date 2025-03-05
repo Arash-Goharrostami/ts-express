@@ -8,10 +8,9 @@
     "clean": "rm -rf dist",
     "build:clean": "npm run clean && npm run build",
     "start": "node dist/services/app1.js",
-    "start:app1": "node dist/services/app1.js",
-    "start:app2": "node dist/services/app2.js",
+    "start:user": "node dist/apps/user/index.js",
     "start:all": "concurrently \"npm run start:app1\" \"npm run start:app2\"",
-    "dev": "concurrently \"npm run dev:user\" \"npm run dev:service\" \"npm run dev:financial\"",
+    "dev:all": "concurrently \"npm run dev:user\" \"npm run dev:service\" \"npm run dev:financial\"",
     "dev:user": "nodemon -r dotenv/config apps/user/index.ts",
     "dev:service": "nodemon -r dotenv/config apps/service/index.ts",
     "dev:financial": "nodemon -r dotenv/config apps/financial/index.ts"

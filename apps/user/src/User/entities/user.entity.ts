@@ -1,5 +1,7 @@
 import mongoose, { Schema, model, Document } from 'mongoose';
 
+import {AbstractEntity} from "../../../../../libs/abstract";
+
 // Enum for User Types
 enum UserType {
   ADMIN = 'ADMIN',
@@ -8,8 +10,8 @@ enum UserType {
 }
 
 // Interface for User Document
-interface IUser {
-  _id: mongoose.Types.ObjectId;
+interface IUser extends AbstractEntity {
+  // _id: mongoose.Types.ObjectId;
   userTypes: UserType[];
   firstName: string;
   middleName: string;

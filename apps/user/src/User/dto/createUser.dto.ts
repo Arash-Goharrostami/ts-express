@@ -6,29 +6,29 @@ export class CreateUserDto {
   userTypes: UserType[] = [UserType.DRIVER]; // Always set to DRIVER
 
   @IsString()
-  firstName: string;
+  firstName!: string;
 
   @IsString()
   @IsOptional()
   middleName?: string | undefined;
 
   @IsString()
-  lastName: string;
+  lastName!: string;
 
   @IsString()
-  phoneNumber: string;
+  phoneNumber!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @IsOptional()
   avatar?: string | undefined;
 
   @IsString()
-  address: string;
+  address!: string;
 
   @IsString()
   @MinLength(6, { message: 'Password must be at least 6 characters long' })
-  password: string;
+  password!: string;
 }
