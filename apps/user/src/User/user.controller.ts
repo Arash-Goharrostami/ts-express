@@ -2,12 +2,12 @@
  * @file this file includes all user routes in single controller class
  */
 
-import "reflect-metadata";
-import {JsonController, Get, Param, Post, Body} from "routing-controllers";
+import 'reflect-metadata';
+import {JsonController, Get, Param, Post, Body} from 'routing-controllers';
 import UserService from './user.service';
-import {IUserController} from "./interface/userController.interface";
-import {CreateUserDto} from "./dto/createUser.dto";
-import {IUser} from "./entities/user.entity";
+import {IUserController} from './interface/userController.interface';
+import {CreateUserDto} from './dto/createUser.dto';
+import {IUser} from './entities/user.entity';
 
 /** --------------------------------------------------------------------------------------------------------------------
  * @description class for handel all User routes in application

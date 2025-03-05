@@ -1,6 +1,6 @@
-import mongoose, {Connection} from "mongoose";
-import {IUser, User} from "./entities/user.entity"; // Import User model and interface
-import {AbstractRepository} from "../../../../libs/abstract";
+import mongoose from 'mongoose';
+import {IUser, User} from './entities/user.entity'; // Import User model and interface
+import {AbstractRepository} from '../../../../libs/abstract';
 
 export default class UserRepository extends AbstractRepository<IUser> {
   constructor() {
@@ -8,7 +8,7 @@ export default class UserRepository extends AbstractRepository<IUser> {
   }
 
   public test(): string {
-    return "testing from repository repository";
+    return 'testing from repository repository';
   }
 
 }
