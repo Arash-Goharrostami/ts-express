@@ -8,7 +8,7 @@
 - [X] MicroService
 - [ ] RabbitMQ
 - [ ] MongoDB database
-- [ ] mySQL database
+- [ ] mySQL database // working on it
 - [ ] Redis
 
 [//]: # (## 🚀 Features)
