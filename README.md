@@ -11,20 +11,20 @@
 - [ ] mySQL database // working on it
 - [ ] Redis
 
-[//]: # (## 🚀 Features)
+## 🚀 Features
 
-[//]: # (- [ ] Implement push notifications)
+- [ ] Implement push notifications
 
-[//]: # (- [ ] Add dark mode support)
+- [ ] Add dark mode support
 
-[//]: # ()
-[//]: # (## 🐞 Bugs)
 
-[//]: # (- [ ] Fix incorrect total calculation in invoices)
+## 🐞 Bugs
 
-[//]: # (- [ ] Resolve UI glitch in profile page)
+- [ ] Fix incorrect total calculation in invoices
 
-[//]: # ()
+- [ ] Resolve UI glitch in profile page
+
+
 [//]: # (## 🛠 Refactoring)
 
 [//]: # (- [x] Migrate to TypeScript)
