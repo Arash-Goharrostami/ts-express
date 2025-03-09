@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
- * @file AbstractRepository
+ * @file abstract.repository.ts
  * @tutorial only need to extand in your repository.
  * @description this file will share common repository methods for the project.
  */
