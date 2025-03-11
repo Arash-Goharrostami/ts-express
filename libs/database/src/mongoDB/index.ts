@@ -1,5 +1,14 @@
+/** --------------------------------------------------------------------------------------------------------------------
+ * @file index.ts
+ * @fileOverview
+ *  this file represent mongoDB connection 4 application
+ */
 import mongoose, { ConnectOptions } from 'mongoose';
 
+/** --------------------------------------------------------------------------------------------------------------------
+ * @define just regular mongoDB auth adn location information.
+ * @type MongoConfig
+ */
 type MongoConfig = {
   mongoDBIp: string;
   mongoDBProt: string;
@@ -10,13 +19,31 @@ type MongoConfig = {
   mongoDbAuthUser?: string;
 };
 
+/** --------------------------------------------------------------------------------------------------------------------
+ * @description
+ *  main class and only class of this file
+ *  this class will serve mongoDB 4 your project depents on inputs,
+ *  it can handle more than one or two connection in same time.
+ * @class
+ */
 class MongoDB {
+
+  /** ------------------------------------------------------------------------------------------------------------------
+   * @define local values validation
+   * @private
+   */
   private static instance: MongoDB;
   private connectionUrl: string = '';
   private options: ConnectOptions = {};
 
   private constructor() {} // Prevent direct instantiation
 
+  /** ------------------------------------------------------------------------------------------------------------------
+   * @description just create instance of new mongoDB connection
+   * @public
+   * @static
+   * @method
+   */
   public static getInstance(): MongoDB {
     if (!MongoDB.instance) {
       MongoDB.instance = new MongoDB();
@@ -24,11 +51,16 @@ class MongoDB {
     return MongoDB.instance;
   }
 
+  /** ------------------------------------------------------------------------------------------------------------------
+   * @description method connec 4 mongoDB
+   * @public
+   * @async
+   * @method
+   * @param { MongoConfig } config
+   */
   public async connect(config: MongoConfig): Promise<void> {
     this.connectionUrl = `mongodb://${config.mongoDBIp}:${config.mongoDBProt}/${config.mongoDbName}`;
     this.options = {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
       authSource: config.mongoDbAuthUser,
     } as ConnectOptions;
 
@@ -43,4 +75,7 @@ class MongoDB {
   }
 }
 
+/** --------------------------------------------------------------------------------------------------------------------
+ * export mine class of this file with default flag
+ */
 export default MongoDB;
