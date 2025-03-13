@@ -1,13 +1,19 @@
 /** --------------------------------------------------------------------------------------------------------------------
- * @file this file includes all user routes in single controller class
+ * @file user.controller.ts
+ * @module Controller/UserController
+ * @fileOverview this file includes all user routes in single controller class
+ * @author Arash Goharrosmami
+ * @date March / 13 / 2025
  */
 
 import 'reflect-metadata';
-import {JsonController, Get, Param, Post, Body} from 'routing-controllers';
+
 import UserService from './user.service';
-import {IUserController} from './interface/userController.interface';
-import {CreateUserDto} from './dto/createUser.dto';
+
 import {IUser} from './entities/user.entity';
+import {CreateUserDto} from './dto/createUser.dto';
+import {IUserController} from './interface/userController.interface';
+import {JsonController, Post, Body} from 'routing-controllers';
 
 /** --------------------------------------------------------------------------------------------------------------------
  * @description class for handel all User routes in application
